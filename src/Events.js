@@ -6,8 +6,17 @@ class Events extends React.Component {
     events: PropTypes.array.isRequired,
   };
 
-  render() {
+  state = { events: [] };
+
+  componentDidMount() {
     const { events } = this.props;
+    this.setState({
+      events,
+    });
+  }
+
+  render() {
+    const { events } = this.state;
 
     return (
       <ul>
