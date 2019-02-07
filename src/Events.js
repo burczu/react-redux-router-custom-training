@@ -1,32 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Events = (props) => {
-  const { events } = props;
+class Events extends React.Component {
+  static propTypes = {
+    events: PropTypes.array.isRequired,
+  };
 
-  return (
-    <ul>
-      {events.map(item => {
-        const date = new Date(item.date);
+  render() {
+    const { events } = this.props;
 
-        if (date >= Date.now()) {
-          return (
-            <li key={item.id}>
-              <strong>{item.name}</strong><br />
-              Gdzie: {item.place}<br />
-              Kiedy: {item.date} - {item.time}
-            </li>
-          );
-        }
+    return (
+      <ul>
+        {events.map(item => {
+          const date = new Date(item.date);
 
-        return null;
-      })}
-    </ul>
-  );
-};
+          if (date >= Date.now()) {
+            return (
+              <li key={item.id}>
+                <strong>{item.name}</strong><br />
+                Gdzie: {item.place}<br />
+                Kiedy: {item.date} - {item.time}
+              </li>
+            );
+          }
 
-Events.propTypes = {
-  events: PropTypes.array.isRequired,
-};
+          return null;
+        })}
+      </ul>
+    );
+  }
+}
 
 export default Events;
