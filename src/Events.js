@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import EventItem from './EventItem';
 
 class Events extends React.Component {
   static propTypes = {
@@ -12,6 +13,7 @@ class Events extends React.Component {
     super(props);
 
     this.clearHandler = this.clearHandler.bind(this);
+    this.deleteHandler = this.deleteHandler.bind(this);
   }
 
   componentDidMount() {
@@ -46,14 +48,7 @@ class Events extends React.Component {
             const date = new Date(item.date);
 
             if (date >= Date.now()) {
-              return (
-                <li key={item.id}>
-                  <strong>{item.name}</strong><br />
-                  Gdzie: {item.place}<br />
-                  Kiedy: {item.date} - {item.time}
-                  <button onClick={() => this.deleteHandler(item.id)}>Usuń</button>
-                </li>
-              );
+              return <EventItem item={item} onDeleteItem={this.deleteHandler}/>;
             }
 
             return null;
