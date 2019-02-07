@@ -24,7 +24,16 @@ class Events extends React.Component {
   clearHandler() {
     this.setState({
       events: [],
-    })
+    });
+  }
+
+  deleteHandler(eventId) {
+    const { events } = this.state;
+    const filtered = events.filter((event) => event.id !== eventId);
+
+    this.setState({
+      events: filtered,
+    });
   }
 
   render() {
@@ -42,6 +51,7 @@ class Events extends React.Component {
                   <strong>{item.name}</strong><br />
                   Gdzie: {item.place}<br />
                   Kiedy: {item.date} - {item.time}
+                  <button onClick={() => this.deleteHandler(item.id)}>Usuń</button>
                 </li>
               );
             }
