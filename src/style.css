@@ -5,3 +5,11 @@ label {
 .error {
   color: red;
 }
+
+.red {
+  background: red;
+}
+
+.blue {
+  background: blue;
+}

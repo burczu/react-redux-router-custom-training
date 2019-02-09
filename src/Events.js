@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import EventItem from './EventItem';
 import Filter from './Filter';
 import EventAdd from './EventAdd';
+import { withLayout } from './hoc';
 
 class Events extends React.Component {
   static propTypes = {
     events: PropTypes.array.isRequired,
+    toggleLayout: PropTypes.func.isRequired,
+    layout: PropTypes.string.isRequired,
   };
 
   state = {
@@ -81,6 +84,7 @@ class Events extends React.Component {
       events,
       filter,
     } = this.state;
+    const { toggleLayout } = this.props;
 
     return (
       <>
@@ -101,9 +105,10 @@ class Events extends React.Component {
           onFormSubmit={this.addSubmitHandler}
           getForm={this.getAddForm}
         />
+        <button onClick={toggleLayout}>Zmień layout</button>
       </>
     );
   }
 }
 
-export default Events;
+export default withLayout(Events);
