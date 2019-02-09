@@ -20,22 +20,22 @@ const EventAdd = (props) => {
       <label htmlFor="name">
         Nazwa:
         <input type="text" id="name" name="name" value={name} onChange={onInputChange} />
-        <span style={{ display: nameValid ? 'none' : 'inline' }}>Pole wymagane</span>
+        <span className="error" style={{ display: nameValid ? 'none' : 'inline' }}>Pole wymagane</span>
       </label>
       <label htmlFor="place">
         Miejsce:
         <input type="text" id="place" name="place" value={place} onChange={onInputChange} />
-        <span style={{ display: placeValid ? 'none' : 'inline' }}>Pole wymagane</span>
+        <span className="error" style={{ display: placeValid ? 'none' : 'inline' }}>Pole wymagane</span>
       </label>
       <label htmlFor="date">
         Data:
         <input type="text" id="date" name="date" value={date} onChange={onInputChange} />
-        <span style={{ display: dateValid ? 'none' : 'inline' }}>Pole wymagane</span>
+        <span className="error" style={{ display: dateValid ? 'none' : 'inline' }}>Pole wymagane</span>
       </label>
       <label htmlFor="time">
         Godzina:
         <input type="text" id="time" name="time" value={time} onChange={onInputChange} />
-        <span style={{ display: timeValid ? 'none' : 'inline' }}>Pole wymagane</span>
+        <span className="error" style={{ display: timeValid ? 'none' : 'inline' }}>Pole wymagane</span>
       </label>
       <button type="submit">Zapisz</button>
     </form>
