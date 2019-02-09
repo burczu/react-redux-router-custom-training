@@ -1,58 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Form, Text } from 'informed';
 
 const EventAdd = (props) => {
-  const {
-    name,
-    nameValid,
-    place,
-    placeValid,
-    date,
-    dateValid,
-    time,
-    timeValid,
-    onInputChange,
-    onFormSubmit,
-  } = props;
+  const { onFormSubmit, getForm } = props;
 
   return (
-    <form onSubmit={onFormSubmit}>
+    <Form onSubmit={onFormSubmit} getApi={getForm}>
       <label htmlFor="name">
         Nazwa:
-        <input type="text" id="name" name="name" value={name} onChange={onInputChange} />
-        <span style={{ display: nameValid ? 'none' : 'inline' }}>Pole wymagane</span>
+        <Text id="name" field="name" />
       </label>
       <label htmlFor="place">
         Miejsce:
-        <input type="text" id="place" name="place" value={place} onChange={onInputChange} />
-        <span style={{ display: placeValid ? 'none' : 'inline' }}>Pole wymagane</span>
+        <Text id="place" field="place" />
       </label>
       <label htmlFor="date">
         Data:
-        <input type="text" id="date" name="date" value={date} onChange={onInputChange} />
-        <span style={{ display: dateValid ? 'none' : 'inline' }}>Pole wymagane</span>
+        <Text id="date" field="date" />
       </label>
       <label htmlFor="time">
         Godzina:
-        <input type="text" id="time" name="time" value={time} onChange={onInputChange} />
-        <span style={{ display: timeValid ? 'none' : 'inline' }}>Pole wymagane</span>
+        <Text id="time" field="time" />
       </label>
       <button type="submit">Zapisz</button>
-    </form>
+    </Form>
   );
 };
 
 EventAdd.propTypes = {
-  name: PropTypes.string.isRequired,
-  nameValid: PropTypes.bool.isRequired,
-  place: PropTypes.string.isRequired,
-  placeValid: PropTypes.bool.isRequired,
-  date: PropTypes.string.isRequired,
-  dateValid: PropTypes.bool.isRequired,
-  time: PropTypes.string.isRequired,
-  timeValid: PropTypes.bool.isRequired,
-  onInputChange: PropTypes.func.isRequired,
   onFormSubmit: PropTypes.func.isRequired,
+  getForm: PropTypes.func.isRequired,
 };
 
 export default EventAdd;

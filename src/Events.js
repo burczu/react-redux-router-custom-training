@@ -12,14 +12,6 @@ class Events extends React.Component {
   state = {
     events: [],
     filter: '',
-    name: '',
-    nameValid: true,
-    place: '',
-    placeValid: true,
-    date: '',
-    dateValid: true,
-    time: '',
-    timeValid: true,
   };
 
   constructor(props) {
@@ -28,8 +20,8 @@ class Events extends React.Component {
     this.clearHandler = this.clearHandler.bind(this);
     this.deleteHandler = this.deleteHandler.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
-    this.addInputHandler = this.addInputHandler.bind(this);
     this.addSubmitHandler = this.addSubmitHandler.bind(this);
+    this.getAddForm = this.getAddForm.bind(this);
   }
 
   componentDidMount() {
@@ -62,65 +54,32 @@ class Events extends React.Component {
     });
   }
 
-  addInputHandler(event) {
-    const { value, name } = event.target;
+  addSubmitHandler(values) {
+    const { events } = this.state;
 
     this.setState({
-      [name]: value,
-      [`${name}Valid`]: value.length > 0,
+      events: [
+        ...events,
+        {
+          ...values,
+          id: events.length + 1,
+        },
+      ]
+    }, () => {
+      if (this.addForm) {
+        this.addForm.reset();
+      }
     });
   }
 
-  addSubmitHandler(event) {
-    event.preventDefault();
-
-    const {
-      events,
-      name,
-      nameValid,
-      place,
-      placeValid,
-      date,
-      dateValid,
-      time,
-      timeValid,
-    } = this.state;
-
-    if (nameValid && placeValid && dateValid && timeValid) {
-      this.setState({
-        events: [
-          ...events,
-          {
-            id: events.length + 1,
-            name,
-            place,
-            date,
-            time,
-          },
-        ]
-      }, () => {
-        this.setState({
-          name: '',
-          place: '',
-          date: '',
-          time: '',
-        });
-      });
-    }
+  getAddForm(form) {
+    this.addForm = form;
   }
 
   render() {
     const {
       events,
       filter,
-      name,
-      nameValid,
-      place,
-      placeValid,
-      date,
-      dateValid,
-      time,
-      timeValid,
     } = this.state;
 
     return (
@@ -139,16 +98,8 @@ class Events extends React.Component {
         </ul>
         <button onClick={this.clearHandler}>Wyczyść</button>
         <EventAdd
-          name={name}
-          nameValid={nameValid}
-          place={place}
-          placeValid={placeValid}
-          date={date}
-          dateValid={dateValid}
-          time={time}
-          timeValid={timeValid}
-          onInputChange={this.addInputHandler}
           onFormSubmit={this.addSubmitHandler}
+          getForm={this.getAddForm}
         />
       </>
     );
