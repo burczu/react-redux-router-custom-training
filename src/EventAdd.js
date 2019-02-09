@@ -15,22 +15,22 @@ const EventAdd = (props) => {
           <label htmlFor="name">
             Nazwa:
             <Text id="name" field="name" validate={validateRequired} />
-            {formState.errors.name && <span>{formState.errors.name}</span>}
+            {formState.errors.name && <span className="error">{formState.errors.name}</span>}
           </label>
           <label htmlFor="place">
             Miejsce:
             <Text id="place" field="place" validate={validateRequired} />
-            {formState.errors.name && <span>{formState.errors.name}</span>}
+            {formState.errors.name && <span className="error">{formState.errors.name}</span>}
           </label>
           <label htmlFor="date">
             Data:
             <Text id="date" field="date" validate={validateRequired} />
-            {formState.errors.name && <span>{formState.errors.name}</span>}
+            {formState.errors.name && <span className="error">{formState.errors.name}</span>}
           </label>
           <label htmlFor="time">
             Godzina:
             <Text id="time" field="time" validate={validateRequired} />
-            {formState.errors.name && <span>{formState.errors.name}</span>}
+            {formState.errors.name && <span className="error">{formState.errors.name}</span>}
           </label>
           <button type="submit">Zapisz</button>
         </>
