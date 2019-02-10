@@ -4,6 +4,7 @@ import EventItem from './EventItem';
 import Filter from './Filter';
 import EventAdd from './EventAdd';
 import { withLayout } from './hoc';
+import { ButtonColorProvider, ButtonColorConsumer } from './context';
 
 class Events extends React.Component {
   static propTypes = {
@@ -15,6 +16,7 @@ class Events extends React.Component {
   state = {
     events: [],
     filter: '',
+    buttonColor: 'green',
   };
 
   constructor(props) {
@@ -25,6 +27,7 @@ class Events extends React.Component {
     this.handleFilter = this.handleFilter.bind(this);
     this.addSubmitHandler = this.addSubmitHandler.bind(this);
     this.getAddForm = this.getAddForm.bind(this);
+    this.toggleLayout = this.toggleLayout.bind(this);
   }
 
   componentDidMount() {
@@ -79,15 +82,25 @@ class Events extends React.Component {
     this.addForm = form;
   }
 
+  toggleLayout(){
+    const { buttonColor } = this.state;
+    const { toggleLayout } = this.props;
+
+    toggleLayout();
+    this.setState({
+      buttonColor: buttonColor === 'green' ? 'yellow' : 'green',
+    });
+  }
+
   render() {
     const {
       events,
       filter,
+      buttonColor,
     } = this.state;
-    const { toggleLayout } = this.props;
 
     return (
-      <>
+      <ButtonColorProvider value={buttonColor}>
         <Filter filter={filter} onFilterChange={this.handleFilter} />
         <ul>
           {events.map(item => {
@@ -100,13 +113,29 @@ class Events extends React.Component {
             return null;
           })}
         </ul>
-        <button onClick={this.clearHandler}>Wyczyść</button>
-        <EventAdd
-          onFormSubmit={this.addSubmitHandler}
-          getForm={this.getAddForm}
-        />
-        <button onClick={toggleLayout}>Zmień layout</button>
-      </>
+        <ButtonColorConsumer>
+          {buttonColor => (
+            <>
+              <button
+                style={{ background: buttonColor }}
+                onClick={this.clearHandler}
+              >
+                Wyczyść
+              </button>
+              <EventAdd
+                onFormSubmit={this.addSubmitHandler}
+                getForm={this.getAddForm}
+              />
+              <button
+                style={{ background: buttonColor }}
+                onClick={this.toggleLayout}
+              >
+                Zmień layout
+              </button>
+            </>
+          )}
+        </ButtonColorConsumer>
+      </ButtonColorProvider>
     );
   }
 }

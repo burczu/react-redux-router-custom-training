@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ButtonColorConsumer } from './context';
 
 const EventItem = (props) => {
   const { item, onDeleteItem } = props;
@@ -9,7 +10,16 @@ const EventItem = (props) => {
       <strong>{item.name}</strong><br />
       Gdzie: {item.place}<br />
       Kiedy: {item.date} - {item.time}
-      <button onClick={() => onDeleteItem(item.id)}>Usuń</button>
+      <ButtonColorConsumer>
+        {buttonColor =>
+          <button
+            style={{ background: buttonColor }}
+            onClick={() => onDeleteItem(item.id)}
+          >
+            Usuń
+          </button>
+        }
+      </ButtonColorConsumer>
     </li>
   );
 };

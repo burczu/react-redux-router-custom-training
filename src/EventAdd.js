@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Text } from 'informed';
+import { ButtonColorConsumer } from './context'
 
 const validateRequired =
     value => !value || value.length === 0 ? 'Pole jest wymagane' : undefined;
@@ -32,7 +33,11 @@ const EventAdd = (props) => {
             <Text id="time" field="time" validate={validateRequired} />
             {formState.errors.name && <span className="error">{formState.errors.name}</span>}
           </label>
-          <button type="submit">Zapisz</button>
+          <ButtonColorConsumer>
+            {buttonColor =>
+              <button style={{ background: buttonColor }} type="submit">Zapisz</button>
+            }
+          </ButtonColorConsumer>
         </>
       )}
     </Form>
