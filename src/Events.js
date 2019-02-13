@@ -5,16 +5,19 @@ import Filter from './Filter';
 import EventAdd from './EventAdd';
 import { withLayout } from './hoc';
 import { ButtonColorProvider, ButtonColorConsumer } from './context';
+import axios from 'axios';
 
 class Events extends React.Component {
   static propTypes = {
-    events: PropTypes.array.isRequired,
     toggleLayout: PropTypes.func.isRequired,
     layout: PropTypes.string.isRequired,
   };
 
   state = {
     events: [],
+    loading: true,
+    error: false,
+    errorMessage: '',
     filter: '',
     buttonColor: 'green',
   };
@@ -31,10 +34,26 @@ class Events extends React.Component {
   }
 
   componentDidMount() {
-    const { events } = this.props;
     this.setState({
-      events,
+      loading: true,
+      error: false,
     });
+
+    axios.get('http://frontendinsights.com/events.json')
+      .then(response => {
+        this.setState({
+          events: response.data,
+          loading: false,
+          error: false,
+        });
+      })
+      .catch(error => {
+        this.setState({
+          loading: false,
+          error: true,
+          errorMessage: error.message,
+        });
+      });
   }
 
   clearHandler() {
@@ -95,9 +114,20 @@ class Events extends React.Component {
   render() {
     const {
       events,
+      loading,
+      error,
+      errorMessage,
       filter,
       buttonColor,
     } = this.state;
+
+    if (loading) {
+      return <p>Ładowanie danych...</p>;
+    }
+
+    if (error) {
+      return <p style={{ color: 'red' }}>{errorMessage}</p>;
+    }
 
     return (
       <ButtonColorProvider value={buttonColor}>
