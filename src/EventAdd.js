@@ -20,17 +20,17 @@ const EventAdd = (props) => {
           <label htmlFor="place">
             Miejsce:
             <Text id="place" field="place" validate={validateRequired} />
-            {formState.errors.name && <span className="error">{formState.errors.name}</span>}
+            {formState.errors.place && <span className="error">{formState.errors.place}</span>}
           </label>
           <label htmlFor="date">
             Data:
             <Text id="date" field="date" validate={validateRequired} />
-            {formState.errors.name && <span className="error">{formState.errors.name}</span>}
+            {formState.errors.date && <span className="error">{formState.errors.date}</span>}
           </label>
           <label htmlFor="time">
             Godzina:
             <Text id="time" field="time" validate={validateRequired} />
-            {formState.errors.name && <span className="error">{formState.errors.name}</span>}
+            {formState.errors.time && <span className="error">{formState.errors.time}</span>}
           </label>
           <button type="submit">Zapisz</button>
         </>
