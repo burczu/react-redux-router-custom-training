@@ -18,6 +18,7 @@ ReactDOM.render(
         );
       }
 
+      // jesli nie chcemy nic wyświetlić, po prostu zwracamy `null`
       return null;
     })}
   </ul>,
