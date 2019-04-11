@@ -1,11 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// komponenty można też definiowac jako klasy
+// powinny wtedy dzidziczyć z klasy `React.Component`
 class Events extends React.Component {
+  // w komponencie "klasowym" propTypes
+  // możemy zdefiniować jako właściwość statyczną
   static propTypes = {
     events: PropTypes.array.isRequired,
   };
 
+  // kod z komponentu funkcyjnego trafia do metody `render` 
   render() {
     const { events } = this.props;
 
