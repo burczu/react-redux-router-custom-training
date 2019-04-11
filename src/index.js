@@ -8,6 +8,7 @@ ReactDOM.render(
     {events.map(item => {
       const date = new Date(item.date);
 
+      // jeśli data większa niż dzisiaj zwróć element <li>
       if (date >= Date.now()) {
         return (
           <li key={item.id}>
@@ -18,9 +19,12 @@ ReactDOM.render(
         );
       }
 
-      // jesli nie chcemy nic wyświetlić, po prostu zwracamy `null`
+      // w przeciwnym razie, po prostu zwracamy `null`
       return null;
     })}
   </ul>,
   document.getElementById('root')
 );
+
+// w efekcie, metoda map() zwróci tablicę w stylu [<li></li>, null, <li></li>]
+// wyrenderują się natomiast tylko elementy listy - null'e zostaną pominięte
