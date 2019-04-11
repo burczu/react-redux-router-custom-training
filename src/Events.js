@@ -13,6 +13,9 @@ class Events extends React.Component {
     super(props);
 
     this.clearHandler = this.clearHandler.bind(this);
+
+    // tym razem musimy zbindować metodę `deleteHandler`,
+    // ponieważ wywołana zostanie ona w kontekście komponentu `EventItem`
     this.deleteHandler = this.deleteHandler.bind(this);
   }
 
