@@ -15,6 +15,8 @@ class Events extends React.Component {
 
     this.clearHandler = this.clearHandler.bind(this);
     this.deleteHandler = this.deleteHandler.bind(this);
+
+    // oczywiście trzeba zbindować
     this.handleFilter = this.handleFilter.bind(this);
   }
 
@@ -41,8 +43,12 @@ class Events extends React.Component {
   }
 
   handleFilter(event) {
+    // aktualną wartość pola tekstowego można pobrać z obiektu `event`
     const { value } = event.target;
 
+    // zmiana stanu, poza zapisaniem wartości powoduje ponowne renderowanie
+    // drzewa komponentów, w tym komponentu `Filter` - to powoduję, że do
+    // pola tekstowego przypisywana jest aktualna wartość stanu
     this.setState({
       filter: value,
     });
@@ -58,6 +64,7 @@ class Events extends React.Component {
           {events.map(item => {
             const date = new Date(item.date);
 
+            // zmieniony warunek: nie renderuj jeśli nazwa nie spełnia filtra
             if (date >= Date.now() && item.name.indexOf(filter) !== -1) {
               return <EventItem item={item} onDeleteItem={this.deleteHandler}/>;
             }
