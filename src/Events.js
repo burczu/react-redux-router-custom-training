@@ -87,6 +87,10 @@ class Events extends React.Component {
     const { toggleLayout } = this.props;
 
     toggleLayout();
+
+    // zmiana stanu, od którego zalezy provider spowoduje re-renderowanie
+    // jego komponentów-dzieci, w tym konsumerów - to spowoduje, zmianę
+    // koloru w komponentach konsumujących
     this.setState({
       buttonColor: buttonColor === 'green' ? 'yellow' : 'green',
     });
@@ -100,6 +104,8 @@ class Events extends React.Component {
     } = this.state;
 
     return (
+      // całość owijamy providerem i przypisujemy mu wartość początkową,
+      // którą trzymamy w stanie komponentu
       <ButtonColorProvider value={buttonColor}>
         <Filter filter={filter} onFilterChange={this.handleFilter} />
         <ul>
@@ -114,6 +120,10 @@ class Events extends React.Component {
           })}
         </ul>
         <ButtonColorConsumer>
+          {/*
+            wewnątrz konsumera mamy dostęp do wartości dostarczanej nam przez provider
+            zmiana stanu w providerze, skutkuje re-renderowanie konsumera z nowa wartością
+          */}
           {buttonColor => (
             <>
               <button
