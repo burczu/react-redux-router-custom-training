@@ -34,13 +34,17 @@ class Events extends React.Component {
   }
 
   componentDidMount() {
+    // przed pobieraniem danych włączamy loader
     this.setState({
       loading: true,
       error: false,
     });
 
+    // danych o wydarzeniach nie pobieramy już z props, tylko ze zdalnej lokacji
     axios.get('http://frontendinsights.com/events.json')
       .then(response => {
+        // kiedy pobieranie się zakończy, zmieniamy stan
+        // przypisując pobrane dane i resetując loader
         this.setState({
           events: response.data,
           loading: false,
@@ -48,6 +52,7 @@ class Events extends React.Component {
         });
       })
       .catch(error => {
+        // w przypadku blędu resetujemy laoder i ustawiamy blad
         this.setState({
           loading: false,
           error: true,
@@ -121,14 +126,17 @@ class Events extends React.Component {
       buttonColor,
     } = this.state;
 
+    // podczas ladowania danych pokazujemy komunikat, a nie pustą listę
     if (loading) {
       return <p>Ładowanie danych...</p>;
     }
 
+    // w przypadku błędu pokazujemy komunikat zamiast listy
     if (error) {
       return <p style={{ color: 'red' }}>{errorMessage}</p>;
     }
 
+    // jeśli nie ładujemy, ani nie ma błędów pokazujemy listę
     return (
       <ButtonColorProvider value={buttonColor}>
         <Filter filter={filter} onFilterChange={this.handleFilter} />
