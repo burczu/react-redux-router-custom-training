@@ -15,11 +15,19 @@ const EventAdd = (props) => {
     onFormSubmit,
   } = props;
 
+  // zwróć uwagę na zdarzenie onSubmit formularza - wywoła się ono
+  // w momencie kliknięcia przycisku typu "submit"
   return (
     <form onSubmit={onFormSubmit}>
       <label htmlFor="name">
         Nazwa:
+        {/*
+          atrybut "name" ma taką samą wartość nazwa właściwości stanu
+          przydaje się to później w metodzie `addInputHandler` (patrz komponent Events)
+        */}
         <input type="text" id="name" name="name" value={name} onChange={onInputChange} />
+
+        {/* zwróć uwagę, ze do właściwości style przekazujemy obiekt */}
         <span className="error" style={{ display: nameValid ? 'none' : 'inline' }}>Pole wymagane</span>
       </label>
       <label htmlFor="place">
@@ -37,6 +45,8 @@ const EventAdd = (props) => {
         <input type="text" id="time" name="time" value={time} onChange={onInputChange} />
         <span className="error" style={{ display: timeValid ? 'none' : 'inline' }}>Pole wymagane</span>
       </label>
+      
+      {/* przycisk typu "submit" - klinięcie wywołuje onSubmit formularza */}
       <button type="submit">Zapisz</button>
     </form>
   );

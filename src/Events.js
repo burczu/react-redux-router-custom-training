@@ -12,6 +12,7 @@ class Events extends React.Component {
   state = {
     events: [],
     filter: '',
+    // początkowe wartości pól tekstowych i walidatorów
     name: '',
     nameValid: true,
     place: '',
@@ -63,10 +64,16 @@ class Events extends React.Component {
   }
 
   addInputHandler(event) {
+    // oprócz value, również atrybut name możemy wyciągnąć z obiektu event
     const { value, name } = event.target;
 
     this.setState({
+      // składnia ES6 pozwalająca pobierać nazwy właściwości obiektu ze zmiennej:
+      // np. jeśli name = 'test' to { [name]: value } jest tożsame z { test: value }
       [name]: value,
+      // tak samo, tylko dodatkowo wykorzystano paramtryzację ciągów znaków:
+      // np. jeśli name = 'test' to text = `${name} text` jest tożsame z
+      // text = 'test text'
       [`${name}Valid`]: value.length > 0,
     });
   }
@@ -74,6 +81,9 @@ class Events extends React.Component {
   addSubmitHandler(event) {
     event.preventDefault();
 
+    // potwierdzając formularz korzystamy z wartości,
+    // które zapisaliśmy w stanie aplikacji
+    // formularz sam w sobie nie trzyma żadnych danych
     const {
       events,
       name,
@@ -86,7 +96,11 @@ class Events extends React.Component {
       timeValid,
     } = this.state;
 
+    // sprawdzenie walidatorów przed wysłaniem formularza
     if (nameValid && placeValid && dateValid && timeValid) {
+      // tutaj tylko dodanie danych do stanu
+      // w "prawdzimy życiu" mogłoby to być wywołanie
+      // endpointa w API
       this.setState({
         events: [
           ...events,
@@ -99,6 +113,11 @@ class Events extends React.Component {
           },
         ]
       }, () => {
+        // do setState można przekazać callback
+        // który wykona się po zakończeniu zmiany stanu
+        // ---
+        // wykorzystujemy go do wyczyszczenia formularza
+        // poprzez wyczyszczenie stanu powiązanego z polami formularza
         this.setState({
           name: '',
           place: '',
