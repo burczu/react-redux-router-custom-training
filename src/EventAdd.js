@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Text } from 'informed';
 
+// walidator to zwykła funkcja, która przyjmuje aktualną wartość pola
+// w przypadku błędu walidacji powinna zwracać treść błędu
+// jeśli nie ma błędu powinna zwracać wartość undefined
 const validateRequired =
     value => !value || value.length === 0 ? 'Pole jest wymagane' : undefined;
 
@@ -14,7 +17,12 @@ const EventAdd = (props) => {
         <>
           <label htmlFor="name">
             Nazwa:
+            {/*
+              field to nazwa pola - później po tej nazwie będziemy mieć
+              dostęne dane w metodzie onSubmit
+            */}
             <Text id="name" field="name" validate={validateRequired} />
+            {/* aktualne wartości błędów mamy dostępne w obiekcie formState */}
             {formState.errors.name && <span className="error">{formState.errors.name}</span>}
           </label>
           <label htmlFor="place">

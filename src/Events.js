@@ -12,6 +12,8 @@ class Events extends React.Component {
   state = {
     events: [],
     filter: '',
+    // nie ma potrzeby trzymać wartości pól i walidatorów
+    // w stanie komponentu - wszystko obsługuje biblioteka
   };
 
   constructor(props) {
@@ -55,12 +57,21 @@ class Events extends React.Component {
   }
 
   addSubmitHandler(values) {
+    // jak widać, nie ma obsługi wpisywania tekstu w pola tekstowe
+    // wszystko to załatwia nam bibliteka
+
     const { events } = this.state;
 
+    // wszystkie wartości formularza znajduja się w zmiennej `values`
+    // pod nazwami podanymi w atrybutach `field`
     this.setState({
       events: [
         ...events,
         {
+          // składania ES6, tzw. operator "spread"
+          // pozwala na skopiowanie wszystkich wartości jednego obiektu do drugiego
+          // np, jeśli values = { a: 1, b: 2 } to test = { ...values }
+          // jest tożsame z: test = { a: values.a, b: values.b }
           ...values,
           id: events.length + 1,
         },
