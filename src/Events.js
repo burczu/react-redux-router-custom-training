@@ -28,9 +28,13 @@ class Events extends React.Component {
   }
 
   deleteHandler(eventId) {
+    // bierzemy aktualną listę wydarzeń ze stanu
     const { events } = this.state;
+
+    // filtrujemy ją
     const filtered = events.filter((event) => event.id !== eventId);
 
+    // zmieniamy stan powodując kolejne renderowanie
     this.setState({
       events: filtered,
     });
@@ -51,6 +55,11 @@ class Events extends React.Component {
                   <strong>{item.name}</strong><br />
                   Gdzie: {item.place}<br />
                   Kiedy: {item.date} - {item.time}
+                  {/*
+                    aby przekazać parametr do metody obsługi zdarzenia
+                    wykorzystujemy funkcję inline
+                    (obiekt `item` jest dostępny dzięki domknięciu)
+                  */}
                   <button onClick={() => this.deleteHandler(item.id)}>Usuń</button>
                 </li>
               );
