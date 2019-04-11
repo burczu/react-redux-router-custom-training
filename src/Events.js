@@ -48,6 +48,11 @@ class Events extends React.Component {
             const date = new Date(item.date);
 
             if (date >= Date.now()) {
+              {/*
+                użycie komponentu EventItem - dane wydarzenia oraz
+                referencję do metody obsługi zdarzenia przekazujemy
+                jako parametry komponentu (będą w nim dostępne w obiekcie "props")
+              */}
               return <EventItem item={item} onDeleteItem={this.deleteHandler}/>;
             }
 
