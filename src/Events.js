@@ -11,6 +11,9 @@ class Events extends React.Component {
   constructor(props) {
     super(props);
 
+    // musimy zbindować metodę `clearHandler` do this, w przeciwnym razie
+    // wewnątrz tej metody `this` będzie równie `undefined`
+    // najlepiej jest robić to w konstruktorze
     this.clearHandler = this.clearHandler.bind(this);
   }
 
@@ -22,6 +25,9 @@ class Events extends React.Component {
   }
 
   clearHandler() {
+    // kiedy użytkownik kliknie przycisk
+    // zmieniamy stan - ustawiamy `this.state.events` na pustą tablicę
+    // to spowoduje kolejne renderowanie i usunięcie wydarzeń z ekranu
     this.setState({
       events: [],
     })
@@ -30,6 +36,9 @@ class Events extends React.Component {
   render() {
     const { events } = this.state;
 
+    // zwróć uwage na tag <></> - komponenty zawsze musi zwracać jeden element
+    // w tym przypadku mamy dwa elementy: <ul> oraz <button> i żeby uniknąć
+    // konieczności owijania ich na przyklad w <div> możemy skorzystać z takiego "helpera"
     return (
       <>
         <ul>
