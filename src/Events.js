@@ -84,6 +84,9 @@ class Events extends React.Component {
       events,
       filter,
     } = this.state;
+
+    // metoda toggleLayour nie jest częścią tego komponentu!
+    // jest ona zdefiniowana w HOC, który nasz komponent wrappuje
     const { toggleLayout } = this.props;
 
     return (
@@ -111,4 +114,6 @@ class Events extends React.Component {
   }
 }
 
+// użycie HOC przed samym exportem - czyli w index.js
+// importujemy już owrappowany komponent
 export default withLayout(Events);
