@@ -1,6 +1,11 @@
 import React from 'react';
 
+// export bez słowa "default" oznacza,
+// że tę będziemy importować z nawiasami klamrowymi:
+// np.: `import { getEvents } from 'Events';`
 export const getEvents = (events) => {
+  // ^^ funkcja strzałkowa - odpowiednik `function getEvents(events) { ... }`
+
   return (
     <ul>
       {events.map(item => {
