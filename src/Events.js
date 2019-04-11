@@ -59,6 +59,9 @@ class Events extends React.Component {
                     aby przekazać parametr do metody obsługi zdarzenia
                     wykorzystujemy funkcję inline
                     (obiekt `item` jest dostępny dzięki domknięciu)
+                    ---
+                    zwróć uwagę, że korzystając z funkcji strzałkowej
+                    nie trzeba bindować do this w konstruktorze
                   */}
                   <button onClick={() => this.deleteHandler(item.id)}>Usuń</button>
                 </li>
