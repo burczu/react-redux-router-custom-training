@@ -12,7 +12,7 @@ const EventItem = (props) => {
       Gdzie: {item.place}<br />
       Kiedy: {item.date} - {item.time}
       {/*
-        przycisk jest tutaj, ale metoda obsług zdarzenia znajduje się
+        przycisk jest tutaj, ale metoda obsługi zdarzenia znajduje się
         w komponencie rodzicu
       */}
       <button onClick={() => onDeleteItem(item.id)}>Usuń</button>
